@@ -1,7 +1,6 @@
 "use client"
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { CiLogin } from "react-icons/ci";
 import {
     HomeIcon,
     UserIcon,

@@ -1,6 +1,6 @@
-import React from 'react';
 
-const DeleteEmployee = async (id: any) => {
+
+const DeleteEmployee = async (id: string) => {
   try {
     const response = await fetch(`/api/auth/EmployeeApi?id=${id}`, {
       method: 'DELETE',

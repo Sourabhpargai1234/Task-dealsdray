@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { PlusCircleIcon } from '@heroicons/react/16/solid';
 import { useSession } from 'next-auth/react';
 import DeleteEmployee from '@/app/ui/DeleteEmployee';
-import EditEmployee from '@/app/ui/EditEmployee';
 
 export default function EmployeePage() {
   const { data: session, status } = useSession();
@@ -14,7 +13,7 @@ export default function EmployeePage() {
     mobile: '',
     designation: '',
     gender: '',
-    courses: [] as string[], // explicitly define as array of strings
+    courses: [] as string[],
     image: null as File | null,
   });
   const [EmployeeDetails, setEmployeeDetails] = useState<any[]>([]);
@@ -71,7 +70,7 @@ export default function EmployeePage() {
     formData.append('mobile', formValues.mobile);
     formData.append('designation', formValues.designation);
     formData.append('gender', formValues.gender);
-    formData.append('courses', JSON.stringify(formValues.courses)); // convert array to string for backend
+    formData.append('courses', JSON.stringify(formValues.courses)); 
     if (formValues.image) {
       formData.append('image', formValues.image);
     }
