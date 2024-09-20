@@ -7,7 +7,7 @@ export default function Home() {
       <div className="flex flex-row"><NavLinks /></div>
       <h2>It's a simple website with mongodb CRUD operations made wth Nextsjs (React framework)</h2>
       <h2>Made by -Sourabh Pargai</h2>
-      <h2>7291084900</h2>
+      <h2>Sourabhpargai1234@gmail.com</h2>
     </div>
   );
 }

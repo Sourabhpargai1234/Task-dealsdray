@@ -1,7 +1,7 @@
 "use server"
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/libs/mongodb";
-import { IEmployeeCrud, EmployeeCrud } from "@/models/EmployeeCrud";
+import { EmployeeCrud } from "@/models/EmployeeCrud";
 import mongoose from "mongoose";
 import { v2 as cloudinary } from 'cloudinary';
 import { uploadToCloudinary } from "@/app/ui/Cloudinary";

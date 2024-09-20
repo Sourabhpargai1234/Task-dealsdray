@@ -1,12 +1,9 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import { PlusCircleIcon } from '@heroicons/react/16/solid';
-import { useSession } from 'next-auth/react';
 import DeleteEmployee from '@/app/ui/DeleteEmployee';
 
 export default function EmployeePage() {
-  const { data: session, status } = useSession();
-  const [isEditing, setIsEditing] = useState(false);
   const [formValues, setFormValues] = useState({
     name: '',
     email: '',
@@ -95,7 +92,7 @@ export default function EmployeePage() {
     return <div className='text-5xl flex h-full justify-center items-center'>Loading...</div>;
   }
 
-  const handleDelete = async (id: any) => {
+  const handleDelete = async (id: string) => {
     const success = await DeleteEmployee(id);
     if (success) {
       alert("Employee deleted successfully.");
@@ -149,7 +146,7 @@ export default function EmployeePage() {
                       {new Date(employee.createdAt).toLocaleString()}
                     </td>
                     <td className="border border-gray-300 p-2 flex justify-center items-center h-[80px]">
-                    <button onClick={() => setIsEditing(true)} className="bg-blue-500 text-white p-2 rounded mr-2">Edit</button>
+                    <button className="bg-blue-500 text-white p-2 rounded mr-2">Edit</button>
                     <button 
                       onClick={() => handleDelete(employee._id)}
                       className="bg-red-500 text-white p-2 rounded"

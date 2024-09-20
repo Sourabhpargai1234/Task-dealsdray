@@ -1,10 +1,8 @@
 "use client";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRef } from "react";
 
 export default function Home() {
-  const linkRef1 = useRef<HTMLAnchorElement | null>(null);
   const { status, data: session } = useSession();
   const imageUrl='/noimage.png'
   console.log(imageUrl)
