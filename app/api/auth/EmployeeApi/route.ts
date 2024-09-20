@@ -127,6 +127,7 @@ export async function DELETE(request: NextRequest) {
       }
       const result = await EmployeeCrud.findByIdAndDelete(id);
       console.log('Deleted Employee id', id);
+      console.log(result);
       return NextResponse.json(
         { message: 'Employee deleted successfully' },
         { status: 200 }
