@@ -210,12 +210,6 @@ const EditEmployee: React.FC<EditEmployeeFormProps> = ({ employeeId, onClose }) 
         <input
           type="file"
           className="border w-full p-2 rounded mt-1"
-          onChange={(e) =>
-            setFormValues((prevValues: any) => ({
-              ...prevValues,
-              Image: e.target.files ? e.target.files[0] : null,
-            }))
-          }
         />
       </label>
 
