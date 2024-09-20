@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { PlusCircleIcon } from '@heroicons/react/16/solid';
 import DeleteEmployee from '@/app/ui/DeleteEmployee';
 import { useSession } from 'next-auth/react';
+import EditEmployee from '@/app/ui/EditEmployee';
 
 export default function EmployeePage() {
   const {status}=useSession();
@@ -16,6 +17,8 @@ export default function EmployeePage() {
     image: null as File | null,
   });
   const [EmployeeDetails, setEmployeeDetails] = useState<Employee[]>([]);
+  const [editingEmployeeId, setEditingEmployeeId] = useState<string | null>(null);
+  const [showEditForm, setShowEditForm] = useState<boolean>(false);
 
   useEffect(()=>{
     const fetchEmployeeDetails = async() => {
@@ -94,6 +97,15 @@ export default function EmployeePage() {
     return <div className='text-5xl flex h-full justify-center items-center'>Loading...</div>;
   }
 
+  const handleEdit = (employeeId: string) => {
+    setEditingEmployeeId(employeeId);
+    setShowEditForm(true);
+  };
+  const closeEditForm = () => {
+    setShowEditForm(false);
+    setEditingEmployeeId(null);
+  };
+
   const handleDelete = async (id: string) => {
     const success = await DeleteEmployee(id);
     if (success) {
@@ -148,7 +160,7 @@ export default function EmployeePage() {
                       {new Date(employee.createdAt).toLocaleString()}
                     </td>
                     <td className="border border-gray-300 p-2 flex justify-center items-center h-[80px]">
-                    <button className="bg-blue-500 text-white p-2 rounded mr-2">Edit</button>
+                    <button className="bg-blue-500 text-white p-2 rounded mr-2" onClick={() => handleEdit(employee._id.toString())}>Edit</button>
                     <button 
                       onClick={() => handleDelete(employee._id.toString())}
                       className="bg-red-500 text-white p-2 rounded"
@@ -313,6 +325,10 @@ export default function EmployeePage() {
               </div>
             </div>
           )}
+
+      {showEditForm && editingEmployeeId && (
+              <EditEmployee employeeId={editingEmployeeId} onClose={closeEditForm} />
+      )}
         </div>
       ) : (
         <div className="text-3xl">Please sign in first</div>
