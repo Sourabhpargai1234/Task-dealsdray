@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 
 interface Employee {
-  _id: number;
+  _id: string;
   Name: string;
   Email: string;
   Mobile_No: string;
@@ -14,7 +14,7 @@ interface Employee {
 }
 
 interface EditEmployeeFormProps {
-  employeeId: number;
+  employeeId: string;
   onClose: () => void;
 }
 
@@ -67,9 +67,9 @@ const EditEmployee: React.FC<EditEmployeeFormProps> = ({ employeeId, onClose }) 
     e.preventDefault();
     try {
       const formData = new FormData();
-      Object.keys(formValues).forEach((key) => {
-        formData.append(key, formValues[key as keyof Employee]);
-      });
+      //Object.keys(formValues).forEach((key) => {
+      //  formData.append(key, formValues[key as keyof Employee]);
+      //});
 
       const response = await fetch(`/api/auth/EmployeeApi/${employeeId}`, {
         method: 'PUT',
