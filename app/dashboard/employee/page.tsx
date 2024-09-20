@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { PlusCircleIcon } from '@heroicons/react/16/solid';
 import DeleteEmployee from '@/app/ui/DeleteEmployee';
+import { useSession } from 'next-auth/react';
 
 export default function EmployeePage() {
+  const {status}=useSession();
   const [formValues, setFormValues] = useState({
     name: '',
     email: '',
@@ -13,7 +15,7 @@ export default function EmployeePage() {
     courses: [] as string[],
     image: null as File | null,
   });
-  const [EmployeeDetails, setEmployeeDetails] = useState<any[]>([]);
+  const [EmployeeDetails, setEmployeeDetails] = useState<Employee[]>([]);
 
   useEffect(()=>{
     const fetchEmployeeDetails = async() => {
@@ -134,12 +136,12 @@ export default function EmployeePage() {
                   <tr key={employee._id}>
                     <td className="border border-gray-300 p-2">{employee._id.toString()}</td>
                     <td className="border border-gray-300 p-2 h-16 w-16">
-                      <img src={employee.Image} className="w-16 h-16 object-cover" alt="User Image" />
+                      <img src={employee.Image || undefined} className="w-16 h-16 object-cover" alt="User Image" />
                     </td>
                     <td className="border border-gray-300 p-2">{employee.Name}</td>
                     <td className="border border-gray-300 p-2">{employee.Email}</td>
                     <td className="border border-gray-300 p-2">{employee.Mobile_No}</td>
-                    <td className="border border-gray-300 p-2">{employee.Designation.join(", ")}</td>
+                    <td className="border border-gray-300 p-2">{employee.Designation}</td>
                     <td className="border border-gray-300 p-2">{employee.Gender}</td>
                     <td className="border border-gray-300 p-2">{employee.Courses}</td>
                     <td className="border border-gray-300 p-2">
@@ -148,7 +150,7 @@ export default function EmployeePage() {
                     <td className="border border-gray-300 p-2 flex justify-center items-center h-[80px]">
                     <button className="bg-blue-500 text-white p-2 rounded mr-2">Edit</button>
                     <button 
-                      onClick={() => handleDelete(employee._id)}
+                      onClick={() => handleDelete(employee._id.toString())}
                       className="bg-red-500 text-white p-2 rounded"
                     >
                       Delete
