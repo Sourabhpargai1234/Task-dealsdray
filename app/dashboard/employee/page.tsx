@@ -23,7 +23,7 @@ export default function EmployeePage() {
         const data = await response.json();
         setEmployeeDetails(data);
       }
-      catch (err: any) {
+      catch (err) {
         console.log(err);
       }
     } ;
